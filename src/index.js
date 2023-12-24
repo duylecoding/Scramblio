@@ -89,14 +89,20 @@ function drawBank() {
   const bankEl = document.getElementById("bank");
 
   drawWordBank(bankEl, combinedBank);
+
+  const optionsEl = document.getElementById("options");
   const newLineEl = document.createElement("div");
   newLineEl.id = "newLine";
   newLineEl.className = "newLine";
   newLineEl.textContent = "New Line";
-  newLineEl.addEventListener("click", function (e) {
+  newLineEl.addEventListener("click", function () {
     appendRow();
   });
-  bankEl.appendChild(newLineEl);
+  optionsEl.appendChild(newLineEl);
+  const shuffleEl = document.createElement("img");
+  shuffleEl.src = "../icons/random-icon.svg";
+  shuffleEl.alt = "Shuffle button";
+  optionsEl.appendChild(shuffleEl);
 }
 
 function init() {

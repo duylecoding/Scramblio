@@ -48,6 +48,12 @@ body {
   justify-content: center;
 }
 
+.options {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: right;
+}
+
 .box {
   display: grid;
   place-items: center;

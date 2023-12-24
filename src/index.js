@@ -1,4 +1,7 @@
 const MAX_WORDS = 4;
+const BANK_ROW_ID = "bankRow";
+const bank = ["pizza", "cake", "steak", "potato"];
+let combinedBank = bank.join("");
 
 function createBox(id, className, textContent) {
   const box = document.createElement("div");
@@ -8,28 +11,33 @@ function createBox(id, className, textContent) {
   return box;
 }
 
+function drawBankBox(bank, letter) {
+  const box = createBox(
+    /* id= */ `box/${letter}`,
+    /* className= */ "box",
+    /* textContent= */ letter
+  );
+  box.addEventListener("click", function (e) {
+    const el = e.target;
+    if (el.id !== "newLine") {
+      el.parentNode.removeChild(el);
+      const split = el.id.split("/");
+      const letter = split[split.length - 1];
+      appendLetterToFirstAvailRow(letter);
+      combinedBank = combinedBank.replace(letter, "");
+    }
+  });
+  bank.appendChild(box);
+}
+
 function drawWordBank(container, word = "") {
   const row = document.createElement("div");
-  row.id = `row`;
+  row.id = BANK_ROW_ID;
   row.className = "line";
   for (let i = 0; i < word.length; i++) {
-    const box = createBox(
-      /* id= */ `box/${i}/${word[i]}`,
-      /* className= */ "box",
-      /* textContent= */ word[i]
-    );
-    box.addEventListener("click", function (e) {
-      const el = e.target;
-      if (el.id !== "newLine") {
-        el.parentNode.removeChild(el);
-        const split = el.id.split("/");
-        appendLetterToFirstAvailRow(split[split.length - 1]);
-      }
-    });
-    row.appendChild(box);
+    drawBankBox(row, word[i]);
   }
   container.appendChild(row);
-  return row;
 }
 
 function appendRow() {
@@ -50,6 +58,12 @@ function appendRow() {
   gridEl.appendChild(row);
 }
 
+function appendToBank(letter) {
+  combinedBank = combinedBank + letter;
+  const bankEl = document.getElementById(BANK_ROW_ID);
+  drawBankBox(bankEl, letter);
+}
+
 function appendLetterToFirstAvailRow(letter) {
   const currentRows = document.getElementById("grid").children.length;
   const row = document.getElementById(`row/${currentRows}`);
@@ -61,6 +75,13 @@ function appendLetterToFirstAvailRow(letter) {
     /* className= */ "box",
     /* textContent= */ letter
   );
+  box.addEventListener("click", function (e) {
+    const el = e.target;
+    el.parentNode.removeChild(el);
+    const split = el.id.split("/");
+    const letter = split[split.length - 1];
+    appendToBank(letter);
+  });
   row.appendChild(box);
   row.appendChild(blankEl);
 }
@@ -83,8 +104,6 @@ function drawGrid() {
 }
 
 function drawBank() {
-  const bank = ["pizza", "cake", "steak", "potato"];
-  let combinedBank = bank.join("");
   combinedBank = shuffle(combinedBank);
   const bankEl = document.getElementById("bank");
 
@@ -102,6 +121,15 @@ function drawBank() {
   const shuffleEl = document.createElement("img");
   shuffleEl.src = "../icons/random-icon.svg";
   shuffleEl.alt = "Shuffle button";
+  shuffleEl.className = "shuffle";
+  shuffleEl.addEventListener("click", function () {
+    combinedBank = shuffle(combinedBank);
+    const bankEl = document.getElementById("bank");
+    while (bankEl.firstChild) {
+      bankEl.removeChild(bankEl.lastChild);
+    }
+    drawWordBank(bankEl, combinedBank);
+  });
   optionsEl.appendChild(shuffleEl);
 }
 

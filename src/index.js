@@ -118,11 +118,12 @@ function drawBank() {
     appendRow();
   });
   optionsEl.appendChild(newLineEl);
+  const shuffleWrapper = document.createElement("div");
   const shuffleEl = document.createElement("img");
   shuffleEl.src = "../icons/random-icon.svg";
   shuffleEl.alt = "Shuffle button";
   shuffleEl.className = "shuffle";
-  shuffleEl.addEventListener("click", function () {
+  shuffleWrapper.addEventListener("click", function () {
     combinedBank = shuffle(combinedBank);
     const bankEl = document.getElementById("bank");
     while (bankEl.firstChild) {
@@ -130,7 +131,8 @@ function drawBank() {
     }
     drawWordBank(bankEl, combinedBank);
   });
-  optionsEl.appendChild(shuffleEl);
+  shuffleWrapper.appendChild(shuffleEl);
+  optionsEl.appendChild(shuffleWrapper);
 }
 
 function init() {

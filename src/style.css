@@ -27,8 +27,8 @@ body {
 .grid {
   display: flex;
   flex-direction: column;
-  height: 50%;
-  width: 50%;
+  margin-right: auto;
+  margin-left: 20vw;
   justify-content: left;
   margin-bottom: 40px;
   min-height: 400px;
@@ -38,13 +38,12 @@ body {
   display: flex;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0 10vw;
 }
 
 .bank {
   display: flex;
-  flex-wrap: wrap;
-  height: 30%;
-  width: 50%;
   justify-content: center;
 }
 

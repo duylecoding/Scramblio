@@ -57,6 +57,25 @@ function appendRow() {
   removeBlankAtRow(currentRows);
   row.appendChild(box);
   gridEl.appendChild(row);
+  addRemoveButtonToRow(currentRows);
+}
+
+function addRemoveButtonToRow(rowId) {
+  const parent = document.getElementById(`row/${rowId}`);
+  if (!parent) {
+    return;
+  }
+
+  const removeWrapper = document.createElement("div");
+  const removeEl = document.createElement("img");
+  removeEl.src = "../icons/close-icon.svg";
+  removeEl.alt = "Remove button";
+  removeEl.className = "shuffle";
+  removeWrapper.addEventListener("click", function () {
+    console.log("uwehiruhi");
+  });
+  removeWrapper.appendChild(removeEl);
+  parent.appendChild(removeWrapper);
 }
 
 function removeBlankAtRow(rowId) {

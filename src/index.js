@@ -1,6 +1,6 @@
 const MAX_WORDS = 4;
 const BANK_ROW_ID = "bankRow";
-const bank = ["pizza", "cake", "steak", "potato"];
+const bank = ["tree", "mistletoe", "cane", "santa"];
 let combinedBank = bank.join("");
 
 function createBox(id, className, textContent) {
@@ -51,7 +51,7 @@ function appendRow() {
   row.className = "line";
   const box = createBox(
     /* id= */ `row/${currentRows + 1}/box/BLANK`,
-    /* className= */ "box",
+    /* className= */ "underline",
     /* textContent= */ ""
   );
   row.appendChild(box);

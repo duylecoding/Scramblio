@@ -58,8 +58,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: auto;
-  margin-right: 32vw;
+  justify-content: space-around;
 }
 
 .box {
@@ -113,4 +112,8 @@ body {
 .shuffle {
   width: 32px;
   height: 32px;
+}
+
+.iconWrapper {
+  cursor: pointer;
 }

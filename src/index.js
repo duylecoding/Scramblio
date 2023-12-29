@@ -67,6 +67,7 @@ function addRemoveButtonToRow(rowId) {
   }
 
   const removeWrapper = document.createElement("div");
+  removeWrapper.className = "iconWrapper";
   const removeEl = document.createElement("img");
   removeEl.src = "../icons/close-icon.svg";
   removeEl.alt = "Remove button";
@@ -147,6 +148,7 @@ function drawBank() {
   });
   optionsEl.appendChild(newLineEl);
   const shuffleWrapper = document.createElement("div");
+  shuffleWrapper.className = "iconWrapper";
   const shuffleEl = document.createElement("img");
   shuffleEl.src = "../icons/random-icon.svg";
   shuffleEl.alt = "Shuffle button";

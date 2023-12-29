@@ -54,8 +54,17 @@ function appendRow() {
     /* className= */ "underline",
     /* textContent= */ ""
   );
+  removeBlankAtRow(currentRows);
   row.appendChild(box);
   gridEl.appendChild(row);
+}
+
+function removeBlankAtRow(rowId) {
+  const parent = document.getElementById(`row/${rowId}`);
+  const blankEl = document.getElementById(`row/${rowId}/box/BLANK`);
+  if (blankEl) {
+    parent.removeChild(blankEl);
+  }
 }
 
 function appendToBank(letter) {

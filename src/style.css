@@ -24,11 +24,16 @@ body {
   font-size: 3.6rem;
 }
 
+.subtitle {
+  color: white;
+  font-size: 2rem;
+}
+
 .grid {
   display: flex;
   flex-direction: column;
   margin-right: auto;
-  margin-left: 20vw;
+  margin-left: 3vw;
   justify-content: left;
   margin-bottom: 40px;
   min-height: 400px;
@@ -39,7 +44,7 @@ body {
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 0 10vw;
+  margin: 0 30vw;
 }
 
 .bank {
@@ -52,7 +57,7 @@ body {
   flex-direction: row;
   align-items: center;
   margin-left: auto;
-  margin-right: 12vw;
+  margin-right: 32vw;
 }
 
 .box {
@@ -92,10 +97,10 @@ body {
 .newLine {
   display: grid;
   place-items: center;
-  width: 200px;
+  width: 175px;
   height: 50px;
   border: 2px solid var(--empty);
-  margin: 4px;
+  margin: 4px 8px;
   color: white;
   text-transform: uppercase;
   font-family: Arial, Helvetica, sans-serif;

@@ -2,6 +2,7 @@ const MAX_WORDS = 4;
 const BANK_ROW_ID = "bankRow";
 const bank = ["tree", "mistletoe", "cane", "santa"];
 let combinedBank = bank.join("");
+let nextAvailableId = 0;
 
 function createBox(id, className, textContent) {
   const box = document.createElement("div");
@@ -47,17 +48,38 @@ function appendRow() {
     return;
   }
   const row = document.createElement("div");
-  row.id = `row/${currentRows + 1}`;
+  const newRowId = nextAvailableId + 1;
+  row.id = `row/${newRowId}`;
   row.className = "line";
   const box = createBox(
-    /* id= */ `row/${currentRows + 1}/box/BLANK`,
+    /* id= */ `row/${newRowId}/box/BLANK`,
     /* className= */ "underline",
     /* textContent= */ ""
   );
-  removeBlankAtRow(currentRows);
+  removeBlankAtRow(findPreviousRowId(newRowId));
   row.appendChild(box);
   gridEl.appendChild(row);
-  addRemoveButtonToRow(currentRows);
+  addRemoveButtonToRow(findPreviousRowId(newRowId));
+}
+
+function removeRow(rowId) {
+  const gridEl = document.getElementById("grid");
+  const row = document.getElementById(`row/${rowId}`);
+  if (row) {
+    gridEl.removeChild(row);
+  }
+}
+
+function findPreviousRowId(rowId) {
+  let id = rowId - 1;
+  while (!document.getElementById(`row/${id}`)) {
+    if (id === 0) {
+      break;
+    }
+    id--;
+  }
+
+  return id;
 }
 
 function addRemoveButtonToRow(rowId) {
@@ -68,12 +90,14 @@ function addRemoveButtonToRow(rowId) {
 
   const removeWrapper = document.createElement("div");
   removeWrapper.className = "iconWrapper";
+  removeWrapper.id = `iconWrapper/${rowId}`;
   const removeEl = document.createElement("img");
   removeEl.src = "../icons/close-icon.svg";
   removeEl.alt = "Remove button";
   removeEl.className = "shuffle";
-  removeWrapper.addEventListener("click", function () {
-    console.log("uwehiruhi");
+  removeEl.id = `remove/${rowId}`;
+  removeWrapper.addEventListener("click", function (e) {
+    removeRow(e.target.id.split("/")[1]);
   });
   removeWrapper.appendChild(removeEl);
   parent.appendChild(removeWrapper);
@@ -98,9 +122,10 @@ function appendLetterToFirstAvailRow(letter) {
   const row = document.getElementById(`row/${currentRows}`);
   const blankEl = document.getElementById(`row/${currentRows}/box/BLANK`);
   blankEl.parentNode.removeChild(blankEl);
+  const newRowId = nextAvailableId + 1;
 
   const box = createBox(
-    /* id= */ `row/${currentRows}/box/${letter}`,
+    /* id= */ `row/${newRowId}/box/${letter}`,
     /* className= */ "box",
     /* textContent= */ letter
   );
